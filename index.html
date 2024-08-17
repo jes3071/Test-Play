@@ -6,6 +6,40 @@
     <title>Unity WebGL Player | ProjectVT</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
+
+<script>
+function lockOrientation() {
+    if (screen.orientation && screen.orientation.lock) {
+        screen.orientation.lock('landscape').catch(function(err) {
+            console.log('Orientation lock failed: ', err);
+        });
+    } else {
+        // For older browsers that don't support screen.orientation
+        // Rotate using CSS as fallback
+        document.body.style.transform = 'rotate(90deg)';
+        document.body.style.transformOrigin = '0 0';
+        document.body.style.width = '100vh';
+        document.body.style.height = '100vw';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+// Lock orientation when the page loads
+window.addEventListener('load', lockOrientation);
+</script>
+
+<style>
+@media screen and (orientation: portrait) {
+    body {
+        transform: rotate(90deg);
+        transform-origin: 0 0;
+        width: 100vh;
+        height: 100vw;
+        overflow: hidden;
+    }
+}
+</style>
+
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
